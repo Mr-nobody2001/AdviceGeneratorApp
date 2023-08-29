@@ -51,7 +51,9 @@ main {
   main {
     min-height: auto;
     height: 350px;
+    min-width: none;
     width: 550px;
+    max-width: none;
     position: absolute;
     transform: translate(-50%, -50%);
   }
