@@ -8,22 +8,21 @@ let button = document.querySelector("main > button");
 
 const apiUrl = "https://api.adviceslip.com/advice";
 
-const consumeApi = function () {
-  fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.status}`);
-      }
+const consumeApi = async function () {
+  try {
+    const response = await fetch(apiUrl);
 
-      return response.json();
-    })
-    .then((data) => {
-      adviceId.textContent = "Advice #" + data.slip.id;
-      advice.textContent = '"' + data.slip.advice + '"';
-    })
-    .catch((error) => {
-      console.error("Erro:", error);
-    });
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    adviceId.textContent = "Advice #" + data.slip.id;
+    advice.textContent = '"' + data.slip.advice + '"';
+  } catch (error) {
+    console.error("Erro:", error);
+  }
 };
 
 window.addEventListener("load", consumeApi);
