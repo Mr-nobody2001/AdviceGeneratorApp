@@ -16,10 +16,10 @@ const consumeApi = async function () {
       throw new Error(`Erro na requisição: ${response.status}`);
     }
 
-    const data = await response.json();
+    let {slip: {id, advice: adviceResponse}} = await response.json();
 
-    adviceId.textContent = "Advice #" + data.slip.id;
-    advice.textContent = '"' + data.slip.advice + '"';
+    adviceId.textContent = `Advice #${id}`;
+    advice.textContent = `"${adviceResponse}"`;
   } catch (error) {
     console.error("Erro:", error);
   }
